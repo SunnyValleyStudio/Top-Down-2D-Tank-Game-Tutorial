@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10;
-    public int damage = 5;
-    public float maxDistance = 10;
+    public BulletData bulletData;
 
     private Vector2 startPosition;
     private float conquaredDistance = 0;
@@ -17,17 +15,17 @@ public class Bullet : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
     }
 
-    public void Initialize()
+    public void Initialize(BulletData bulletData)
     {
+        this.bulletData = bulletData;
         startPosition = transform.position;
-        rb2d.velocity = transform.up * speed;
-
+        rb2d.velocity = transform.up * this.bulletData.speed;
     }
 
     private void Update()
     {
         conquaredDistance = Vector2.Distance(transform.position, startPosition);
-        if (conquaredDistance >= maxDistance)
+        if (conquaredDistance >= bulletData.maxDistance)
         {
             DisableObject();
         }
@@ -46,7 +44,7 @@ public class Bullet : MonoBehaviour
         var damagable = collision.GetComponent<Damagable>();
         if (damagable != null)
         {
-            damagable.Hit(damage);
+            damagable.Hit(bulletData.damage);
         }
 
         DisableObject();
