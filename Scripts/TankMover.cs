@@ -23,9 +23,18 @@ public class TankMover : MonoBehaviour
         this.movementVector = movementVector;
         CalculateSpeed(movementVector);
         if (movementVector.y > 0)
+        {
+            if (currentForewardDirection == -1)
+                currentSpeed = 0;
             currentForewardDirection = 1;
+        }  
         else if (movementVector.y < 0)
+        {
+            if (currentForewardDirection == 1)
+                currentSpeed = 0;
             currentForewardDirection = -1;
+        }
+            
     }
 
     private void CalculateSpeed(Vector2 movementVector)
