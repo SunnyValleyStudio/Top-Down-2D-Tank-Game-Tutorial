@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Damagable : MonoBehaviour
 {
     public int MaxHealth = 100;
+
     [SerializeField]
     private int health;
 
